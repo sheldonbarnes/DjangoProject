@@ -38,7 +38,7 @@ class Contact (models.Model):
     PhoneNumber = models.CharField(max_length=20)
     EmailAddress = models.EmailField(max_length=254)
     Address = models.CharField(max_length=100)
-    User = models.OneToOneField(User, default=2)
+    User = models.ForeignKey(User)
     #team_name = models.ForeignKey(UserProfile, default=0)
     #User_id = models.OneToOneField(User)
     def __str__(self):              # __unicode__ on Python 2
