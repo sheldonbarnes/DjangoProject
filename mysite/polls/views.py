@@ -1,17 +1,24 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
-from .models import UserForm, UserProfileForm
+from django.template import Context
+
+from .models import UserForm, UserProfileForm, Contact
 
 from django.shortcuts import render_to_response
 
 
 def contacts_view(request):
   # Request the context of the request.
+
+    context_dict = {}
     # The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
 
-    return render_to_response('contacts.html', {}, context)
+    contacts = Contact.objects.get(User=request.user)
+    context_dict['contacts'] = contacts
+
+    return render_to_response('contacts.html', context_dict, context)
 def index(request):
   # Request the context of the request.
     # The context contains information such as the client's machine details, for example.
