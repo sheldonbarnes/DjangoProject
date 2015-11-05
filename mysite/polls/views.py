@@ -15,7 +15,7 @@ def contacts_view(request):
     # The context contains information such as the client's machine details, for example.
     context = RequestContext(request)
 
-    contacts = Contact.objects.get(User=request.user)
+    contacts = Contact.objects.filter(User=request.user).values()
     context_dict['contacts'] = contacts
 
     return render_to_response('contacts.html', context_dict, context)
