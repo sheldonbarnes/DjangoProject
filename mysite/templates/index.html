@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title>Welcome to ISA Contacts App</title>
+</head>
+<body>
+
+<a href="/login/">Login</a>
+
+  {% if user.is_authenticated %}
+  <h1>ISA Contact says... hello {{ user.username }}!</h1>
+  {% else %}
+  <h1>Rango says... hello world!</h1>
+  {% endif %}
+
+
+</body>
+</html>

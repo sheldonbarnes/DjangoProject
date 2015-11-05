@@ -4,33 +4,15 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-from django.contrib.auth.models import User
-from django import forms
-
-
-
 class UserProfile(models.Model):
-
+    # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
-
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
         return self.user.username
-
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('user', 'website')
 
 class Contact (models.Model):
     FirstName = models.CharField(max_length=50)
@@ -38,9 +20,6 @@ class Contact (models.Model):
     PhoneNumber = models.CharField(max_length=20)
     EmailAddress = models.EmailField(max_length=254)
     Address = models.CharField(max_length=100)
-    user = models.OneToOneField(User,primary_key=True,default=1)
-    #team_name = models.ForeignKey(UserProfile, default=0)
-    #User_id = models.OneToOneField(User)
     def __str__(self):              # __unicode__ on Python 2
         return self.FirstName + " " + self.LastName
 

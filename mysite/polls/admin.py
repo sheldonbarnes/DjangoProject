@@ -1,8 +1,12 @@
 from django.contrib import admin
 
-from .models import Choice, Question
+from .models import Choice, Question, Contact, UserProfile
 
-
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('FirstName', 'LastName','PhoneNumber','EmailAddress','Address')
+    search_fields = ['FirstName', 'LastName','PhoneNumber','EmailAddress','Address']
+    list_filter = ['LastName','FirstName']
+    
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 2
@@ -20,5 +24,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
     list_per_page = 100
     search_fields = ['question_text']
-admin.site.register(Question, QuestionAdmin)
 
+admin.site.register(Contact,ContactAdmin)
+admin.site.register(UserProfile)
+#admin.site.register(Question, QuestionAdmin)
